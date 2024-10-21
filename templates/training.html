@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='.png') }}">
+    <title>Seems - Train Image</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+        .main_box {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('serve_image', filename='background.jpg') }}');
+            height: 100vh;
+            background-size: cover;
+        }
+        .button_one i {
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            position: absolute;
+            left: 16px;
+            line-height: 60px;
+            cursor: pointer;
+            transition: all 0.1s linear;
+        }
+        .sidebar_menu {
+            position: fixed;
+            left: -300px;
+            height: 100vh;
+            width: 300px;
+            top: 0px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            transition: all 0.4s linear;
+            text-decoration : none;
+        }
+        .sidebar_menu .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .sidebar_menu .logo {
+            position: absolute;
+            width: 100%;
+            line-height: 60px;
+            box-shadow: 0 3px 6px rgba(255, 255, 255, 0.5);
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .sidebar_menu .logo a {
+            position: absolute;
+            left: 90px;
+            color: white;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .sidebar_menu .button_two i {
+            color: grey;
+            font-size: 25px;
+            position: absolute;
+            left: 270px;
+            opacity: 0;
+            cursor: pointer;
+            transition: all 0.1s linear;
+        }
+        .sidebar_menu .menu {
+            position: absolute;
+            width: 100%;
+            top: 70px;
+        }
+        .sidebar_menu .menu li {
+            margin-top: 6px;
+            padding: 15px 25px;
+        }
+        .sidebar_menu .menu i, a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .sidebar_menu .menu i {
+            padding-right: 30px;
+        }
+        #check {
+            display: none;
+        }
+        #check:checked ~ .sidebar_menu {
+            left: 0;
+        }
+        #check:checked ~ .button_one i {
+            opacity: 0;
+        }
+        #check:checked ~ .sidebar_menu .button_two i {
+            opacity: 1;
+        }
+        .logo-top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .logo-top-right img {
+            width: 150px;
+        }
+        .content {
+            position: absolute;
+            top: 20%;
+            left: 25%;
+            transform: translate(-50% -50%);
+            text-align: center;
+            color: white;
+            border-radius: 20px;
+        }
+        .training-section {
+            width: 900px;
+            max-width: 800px;
+            height: 500px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.6);
+        }
+        .training-section h2 {
+            margin: 10px 0;
+            font-size: 40px;
+            color: white;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 2px #aaa;
+        }
+        .student_container h2 {
+            margin: 20px 0;
+            font-size: 40px;
+            color: white;
+            text-shadow: 1px 1px 2px #aaa;
+        }
+        .form-group h3{
+            margin: 20px 0;
+            font-size: 30px;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px #aaa;
+        }
+        .btn-primary {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .alert {
+            margin-top: 0px;
+            border-radius: 4px;
+        }
+        .close {
+            margin-top: 10px;
+            border-radius: 4px;
+            color: white;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            animation: scroll-left 13s linear infinite;
+        }
+        @keyframes scroll-left {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main_box">
+        <div class="main_box">
+    <input type="checkbox" id="check" />
+    <div class="button_one">
+        <label for="check">
+            <i class="fa-solid fa-bars"></i>
+        </label>
+    </div>
+
+    <div class="sidebar_menu">
+        <div class="logo">
+            <a href="#">SEEMS</a>
+        </div>
+
+        <div class="button_two">
+            <label for="check">
+                <i class="fa-solid fa-xmark"></i>
+            </label>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><i class="fa-solid fa-registered"></i><a href="{{ url_for('recognize') }}">Recognize</a></li>
+                <li><i class="fa-solid fa-t"></i><a href="{{ url_for('train_image') }}">Train Image</a></li>
+                <li><i class="fa-solid fa-database"></i><a href="{{ url_for('student_data') }}">Student Data</a></li>
+                <li><i class="fa-solid fa-key"></i><a href="{{ url_for('change_password') }}">Change Password</a></li>
+                <li><i class="fa-solid fa-right-from-bracket"></i><a href="{{ url_for('logout') }}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Other content -->
+</div>
+
+
+        <div class="logo-top-right">
+            <img src="{{ url_for('serve_image', filename='logo.png') }}" alt="SEEMS Logo">
+        </div>
+
+        <div class="content">
+            <div class="training-section">
+                <h2 class='seems' style="font-size: 80px;">TRAIN IMAGE</h2>
+
+                <!-- Form for uploading and training -->
+                <form action="{{ url_for('train_image') }}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <h3><label for="images">LOAD IMAGES</label></h3>
+                        <input type="file" class="form-control" id="images" name="images" multiple required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">LOAD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4><b>SEEMS DEVELOPERS : <br> ASHITH A V & GAGAN K M </b></h4>
+    </div>
+
+    <!-- Bootstrap Modal for messages -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS for handling the modal and alert dismissal -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            {% if messages %}
+                $('#messageModal').modal('show');
+            {% endif %}
+        });
+    </script>
+</body>
+</html>

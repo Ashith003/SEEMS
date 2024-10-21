@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEEMS - Log Out</title>
+    <link rel="icon" href="{{ url_for('static', filename='.png') }}">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('serve_image', filename='background.jpg') }}');
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        .logo-top {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .logo-top img {
+            width: 150px;
+        }
+        .message-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 5px 10px 20px rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .message-container h2 {
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .message-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .message-container a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            animation: scroll-left 13s linear infinite;
+        }
+        @keyframes scroll-left {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-top">
+        <img src="{{ url_for('serve_image', filename='logo.png') }}" alt="SEEMS Logo">
+    </div>
+  
+    <div class="message-container">
+        <h2>You have been Logged out</h2>
+        <a href="{{ url_for('login') }}">Log In Again</a>
+    </div>
+
+    <div class="footer">
+        <h3>SEEMS DEVELOPERS: <br> ASHITH A V & GAGAN K M </h3>
+    </div>
+</body>
+</html>
