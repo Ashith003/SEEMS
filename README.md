@@ -18,8 +18,10 @@ Frontend: HTML, CSS
 Cameras: HIFOCUS 8MP 4K UHD Outdoor CCTV Cameras
 
 # To Use this Project, Run this command in gitbash terminal :
-git clone https://github.com/your-username/seems.git
+git clone https://github.com/your-username/SEEMS.git
+
 cd seems
+
 python sever.py
 
 # Contact :
